@@ -78,3 +78,32 @@ curl -X POST http://localhost:5000/api/simulate-call \
 2. Click on "Pending Requests"
 3. You should see both escalated questions
 
+
+### Step 4: Respond to Pending Requests
+1. Type your answer in the text area
+2. Click "Submit Answer"
+3. Watch server console for follow-up message
+
+### Step 5: Verify Knowledge Base Update
+1. Go to http://localhost:5000/knowledge
+2. You should see the newly added answers in the knowledge base
+3. Note the "source" column shows "supervisor"
+
+### Step 6: Test Learning - Ask Similar Question 
+API Call:
+```bash
+curl -X POST http://localhost:5000/api/simulate-call \
+  -H "Content-Type: application/json" \
+  -d '{"question": "Do you color men's hair?", "customer_phone": "555-9999"}'
+```
+Expected Result:
+- AI should answer immediately using the updated knowledge base.
+- No supervisor escalation needed
+
+
+## Optional : Automated Test Script
+You can also run the provided test script to automate the above tests.
+
+```bash
+python test_workflow.py
+```
