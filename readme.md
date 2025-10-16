@@ -103,7 +103,7 @@ python run.py
 
 ## Testing & Workflow
 
-Refer to [TESTING.md](TESTING.md) for running the application, testing scenarios, and workflow details.
+Refer to [TESTING.md](testing.md) for running the application, testing scenarios, and workflow details.
 
 ## Future Enhancements
 
