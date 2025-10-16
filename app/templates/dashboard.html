@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-3">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Pending Requests</h5>
+                <h2 class="card-text" id="pending-count">0</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Resolved Today</h5>
+                <h2 class="card-text" id="resolved-count">0</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-info mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Knowledge Base</h5>
+                <h2 class="card-text" id="knowledge-count">0</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>Quick Actions</h5>
+            </div>
+            <div class="card-body">
+                <a href="/requests?status=pending" class="btn btn-warning btn-lg me-2">
+                    <i class="fas fa-exclamation-circle"></i> Pending Requests
+                </a>
+                <a href="/knowledge" class="btn btn-info btn-lg">
+                    <i class="fas fa-brain"></i> Knowledge Base
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Simple dashboard stats
+    fetch('/api/help-requests?status=pending')
+        .then(r => r.json())
+        .then(requests => {
+            document.getElementById('pending-count').textContent = requests.length;
+        });
+
+    fetch('/api/knowledge-base')
+        .then(r => r.json())
+        .then(knowledge => {
+            document.getElementById('knowledge-count').textContent = knowledge.length;
+        });
+</script>
+{% endblock %}
